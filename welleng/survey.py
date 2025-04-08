@@ -1662,24 +1662,24 @@ def _interpolate_surveys(survey, md, xs, indexes):
 
     len_svy = len(survey.md)
     len_md = len(md)
-    sorted_arr = np.zeros((len_svy+len_md, 3))
-    sorted_arr[0:len_svy, 0] = survey.md
-    sorted_arr[len_svy:, 0] = md
-    sorted_arr[0:len_svy, 1] = survey.inc_rad
-    sorted_arr[len_svy:, 1] = inc
-    sorted_arr[0:len_svy, 2] = survey.azi_grid_rad
-    sorted_arr[len_svy:, 2] = azi
+    sorted_arr = np.zeros((3, len_svy+len_md))
+    sorted_arr[0, 0:len_svy] = survey.md
+    sorted_arr[0, len_svy:] = md
+    sorted_arr[1, 0:len_svy] = survey.inc_rad
+    sorted_arr[1, len_svy:] = inc
+    sorted_arr[2, 0:len_svy] = survey.azi_grid_rad
+    sorted_arr[2, len_svy:] = azi
 
     # sort on md
-    sorted_arr = sorted_arr[np.argsort(sorted_arr[:, 0])]
+    sorted_arr = sorted_arr[:, np.argsort(sorted_arr[0, :])]
 
     sh = survey.header
     sh.azi_reference = 'grid'
 
     survey_interpolated = Survey(
-        md=sorted_arr[:,0],
-        inc=sorted_arr[:,1],
-        azi=sorted_arr[:,2],
+        md=sorted_arr[0,:],
+        inc=sorted_arr[1,:],
+        azi=sorted_arr[2,:],
         start_xyz=survey.start_xyz,
         start_nev=survey.start_nev,
         header=sh,
