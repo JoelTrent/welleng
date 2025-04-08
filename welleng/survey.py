@@ -1670,7 +1670,7 @@ def _interpolate_surveys(survey, md, xs, indexes):
     sorted_arr[0:len_svy, 2] = survey.azi_grid_rad
     sorted_arr[len_svy:, 2] = azi
 
-    # sort on 
+    # sort on md
     sorted_arr = sorted_arr[np.argsort(sorted_arr[:, 0])]
 
     sh = survey.header
