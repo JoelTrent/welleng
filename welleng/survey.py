@@ -930,11 +930,20 @@ class Survey:
 
         Examples
         --------
+        >>> import welleng as we
+        >>> import numpy as np
+        >>> survey=we.survey.Survey(
+        ...       md=[0, 500, 1000, 2000, 3000],
+        ...       inc=[0, 0, 30, 90, 90],
+        ...       azi=[0, 0, 45, 135, 180],
+        ...    )
+        >>> survey_interp = survey.interpolate_mds(
+        ...    np.arange(0, 3000, 30)
+        ... )
         """
          
         s = interpolate_mds(self, md)
         return s
-
 
     def interpolate_md(self, md):
         """
