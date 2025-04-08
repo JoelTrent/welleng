@@ -30,6 +30,7 @@ def test_survey_interpolate_survey_vs_interpolate_mds(step=30):
     assert np.allclose(survey_interp.pos_xyz, survey_interp_1.pos_xyz)
     assert np.allclose(survey_interp.pos_nev, survey_interp_1.pos_nev)
     assert np.allclose(survey_interp.dogleg, survey_interp_1.dogleg)
+    assert np.all(survey_interp.interpolated == survey_interp_1.interpolated)
 
     survey_interp = SURVEY.interpolate_mds(mds)
     assert isinstance(survey_interp, we.survey.Survey)
@@ -41,6 +42,7 @@ def test_survey_interpolate_survey_vs_interpolate_mds(step=30):
     assert np.allclose(survey_interp.pos_xyz, survey_interp_1.pos_xyz)
     assert np.allclose(survey_interp.pos_nev, survey_interp_1.pos_nev)
     assert np.allclose(survey_interp.dogleg, survey_interp_1.dogleg)
+    assert np.all(survey_interp.interpolated == survey_interp_1.interpolated)
 
 def test_survey_interpolate_survey_tvd(step=10):
     global SURVEY

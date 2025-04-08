@@ -1687,10 +1687,7 @@ def _interpolate_surveys(survey, md, xs, indexes):
         error_model=None
     )
 
-    survey_interpolated.interpolated = [
-        False if md in survey.md else True
-        for md in survey_interpolated.md
-    ]
+    survey_interpolated.interpolated = ~np.isin(survey_interpolated.md, survey.md)
 
     i = -1
     radii = []
